@@ -1,4 +1,4 @@
-import { CommonModule,NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators,AbstractControl } from '@angular/forms';
 
@@ -23,7 +23,7 @@ export class ProduitFormComponent {
     })
   }
 
-  get f():{[key:string]:AbstractControl}{
+  get f():Record<string, AbstractControl>{
     return this.productForm.controls
   }
   get isprumuim():boolean{
