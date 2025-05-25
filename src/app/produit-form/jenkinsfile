@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+
+    environment {
+        EMAIL_RECEPT = 'abdalkabir29@gmail.com'
+    }
+
+    stages {
+        stage('clone') {
+            steps {
+                 git 'https://github.com/AKGtec/formReactiveAngular.git'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat 'npm install'
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                bat 'npm run lint'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'npm run build --prod'
+                echo 'Build completed successfully!'
+            }
+        }
+
+  
+
+        stage('Build Docker Image') {
+            steps {
+             bat 'docker build -t reactive-forms .'
+
+            }
+        }
+
+             stage('run Docker Image') {
+            steps {
+             bat 'docker run -d -p 8080:80 reactive-forms'
+             
+            }
+        }
+    }
+
+    post {
+        
+        success {
+            mail to: "${EMAIL_RECEPT}", subject: 'Pipeline Success', body: 'The pipeline has completed successfully.'
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            mail to: "${EMAIL_RECEPT}", subject: 'Pipeline Failed', body: 'The pipeline has failed.'
+            echo 'Pipeline failed!'
+        }
+        always {
+            // Clean workspace
+            cleanWs()
+        }
+    }
+}

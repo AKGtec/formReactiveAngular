@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators,AbstractControl
 export class ProduitFormComponent {
 
   productForm:FormGroup;
-  constructor(private fp:FormBuilder){
+  constructor(readonly fp:FormBuilder){
 
     this.productForm =this.fp.group({
       name:["",Validators.required],
@@ -30,8 +30,8 @@ export class ProduitFormComponent {
     return this.productForm.get("price")?.value>1000
   }
   onsubmit():void{
-    if(this.productForm.valid)
-      console.log("product cree",this.productForm.value)
+    if(this.productForm.valid){
+      console.log("product cree",this.productForm.value)}
      console.warn("errrror")
   }
   onreset():void{
