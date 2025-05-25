@@ -1,0 +1,54 @@
+<h2>Creation des produits</h2>
+<form [formGroup]="productForm" (ngSubmit)="onsubmit()">
+    <div class="form-group">
+        <label for="name">Nom du produit:</label>
+        <input type="text" id="name" formControlName="name" class="form-control">
+        <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+            Le nom est obligatoire
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="category">Catégorie:</label>
+        <select id="category" formControlName="category" class="form-control">
+            <option value="">Sélectionner une catégorie</option>
+            <option value="electronics">Électronique</option>
+            <option value="clothing">Vêtements</option>
+            <option value="books">Livres</option>
+            <option value="food">Alimentation</option>
+            <option value="sports">Sports & Loisirs</option>
+        </select>
+        <div *ngIf="f['category'].touched && f['category'].invalid" class="alert alert-danger">
+            La catégorie est obligatoire
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Prix:</label>
+        <input type="number" id="price" formControlName="price" class="form-control">
+        <div *ngIf="f['price'].touched && f['price'].invalid" class="alert alert-danger">
+            Le prix doit être supérieur à 0.01
+        </div>
+        <div *ngIf="isprumuim" class="alert alert-info">
+            Produit premium
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Quantity">Quantité:</label>
+        <input type="number" id="Quantity" formControlName="Quantity" class="form-control">
+        <div *ngIf="f['Quantity'].touched && f['Quantity'].invalid" class="alert alert-danger">
+            La quantité est obligatoire
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="desc">Description:</label>
+        <textarea id="desc" formControlName="desc" class="form-control"></textarea>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit"  class="btn btn-primary">Enregistrer</button>
+        <button type="button" (click)="onreset()" class="btn btn-secondary">Réinitialiser</button>
+    </div>
+</form>

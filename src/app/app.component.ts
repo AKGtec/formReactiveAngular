@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ProduitFormComponent } from './produit-form/produit-form.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone:true,
+  imports: [ProduitFormComponent],
+  template: `<app-produit-form></app-produit-form>`
 })
 export class AppComponent {
   title = 'ReactiveForms';
